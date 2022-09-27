@@ -24,3 +24,8 @@ spec:
             - name: frontend
               containerPort: 8888
               protocol: TCP
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: simpletest-agent.observability.svc.cluster.local
+            - name: JAEGER_AGENT_PORT
+              value: "6831"
