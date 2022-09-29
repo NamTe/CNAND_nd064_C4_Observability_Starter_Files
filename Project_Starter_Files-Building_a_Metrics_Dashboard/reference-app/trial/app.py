@@ -1,9 +1,8 @@
 import logging
 import re
+
 import requests
-
-
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_opentracing import FlaskTracing
 from jaeger_client import Config
 from jaeger_client.metrics.prometheus import PrometheusMetricsFactory
@@ -11,14 +10,13 @@ from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from prometheus_flask_exporter import PrometheusMetrics
 
-
 app = Flask(__name__)
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
 
 metrics = PrometheusMetrics(app)
 # static information as metric
-metrics.info("app_info", "Application info", version="1.0.3")
+metrics.info("trial", "Application info", version="1.0.3")
 
 logging.getLogger("").handlers = []
 logging.basicConfig(format="%(message)s", level=logging.DEBUG)
@@ -45,13 +43,22 @@ def init_tracer(service):
 tracer = init_tracer("trial")
 flask_tracer = FlaskTracing(tracer, True, app)
 
+nt_requests_by_status = metrics.summary(
+    "requests_by_status",
+    "Request latencies by status",
+    labels={"status": lambda r: r.status_code},
+)
+
 
 @app.route("/")
+@nt_requests_by_status
 def homepage():
-    return render_template("main.html")
+    with tracer.start_span("homepage") as span:
+        return render_template("main.html")
 
 
 @app.route("/trace")
+@nt_requests_by_status
 def trace():
     def remove_tags(text):
         tag = re.compile(r"<[^>]+>")
@@ -90,4 +97,6 @@ def trace():
 
 
 if __name__ == "__main__":
-    app.run(debug=True,)
+    app.run(
+        debug=True,
+    )
