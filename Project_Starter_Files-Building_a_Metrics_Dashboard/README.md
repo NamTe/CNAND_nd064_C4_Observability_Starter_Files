@@ -87,9 +87,13 @@ Description: Request the home page trial service but the template not found
     Saturation — The overall capacity of a service (such as the percentage of memory or CPU used).
 
 ## Building KPIs for our plan
-*TODO*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
+*DONE*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
 
-- CPU Utilization less than 70%
+- CPU Utilization less than 50%
+- Memory Utilization less than 70%
+- Backend API request/response time should be under 100ms
 
 ## Final Dashboard
-*TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
+*DONE*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
+
+![Final Dashboard](./answer-img/final.png "Final Dashboard")
