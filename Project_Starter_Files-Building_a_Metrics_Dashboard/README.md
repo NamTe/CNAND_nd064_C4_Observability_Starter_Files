@@ -18,6 +18,8 @@
 
 ![Dashboard in Grafana with Prometheus as a source](./answer-img/cpu_usage_dashboard.png "Cpu usage with backend container")
 
+![Create a Basic Dashboard shows Prometheus as a source](./answer-img/grafana_home_page_after_login_review.png "Create a Basic Dashboard shows Prometheus as a source")
+
 ## Describe SLO/SLI
 *DONE:* Describe, in your own words, what the SLIs are, based on an SLO of *monthly uptime* and *request response time*.
 - SLIs is actual meassurement of SLO. In case of SLO *monthly uptime* and *request response time*. We can have these following SLI
@@ -42,7 +44,7 @@ The first 4 metrics is from *Four Golden Signals*
 ## Create a Dashboard to measure our SLIs
 *DONE:* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.
 
-![Backend Jaeger](./answer-img/dash_board.png "Backend Jaeger")
+![Create a Dashboard to measure our SLIs](./answer-img/up-time-error.png "Uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors")
 
 
 ## Tracing our Flask App
@@ -72,7 +74,9 @@ Affected Area: home page api of trial service
 
 Severity: High
 
-Description: Request the home page trial service but the template not found
+Description: Request the home page trial service but the template not found. The image below contain the trace span.
+
+![Trace Span](./answer-img/trial_trace_span.png "Trace Span")
 
 
 ## Creating SLIs and SLOs
@@ -89,11 +93,20 @@ Description: Request the home page trial service but the template not found
 ## Building KPIs for our plan
 *DONE*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
 
-- CPU Utilization less than 50%
-- Memory Utilization less than 70%
-- Backend API request/response time should be under 100ms
+- Latency
+    - Backend API request/response time
+    - Trial API request/response time
+- Traffic
+    - Total of HTTP requests/second for Backend
+    - Total of HTTP requests/second for Frontend
+- Errors
+    - Total 40x error code
+    - Total 50x error code
+- Saturation
+    - CPU Utilization
+    - Memory Utilization
 
 ## Final Dashboard
 *DONE*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
 
-![Final Dashboard](./answer-img/final.png "Final Dashboard")
+![Final Dashboard](./answer-img/final_after_review.png "Final Dashboard")
